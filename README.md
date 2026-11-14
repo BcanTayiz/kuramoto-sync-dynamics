@@ -66,7 +66,7 @@ To run the simulation locally:
 Use the control buttons at the top of the viewport to switch physical regimes instantly:
 * **Scenario 1: Short Memory ($\alpha = 0.40$):** Tests weak memory coupling.
 * **Scenario 2: Long Memory ($\alpha = 0.90$):** Tests strong historical dominance.
-* **Scenario 3: Saf Markovian ($\alpha = 0.00$):** Tests baseline memoryless diffusion.
+* **Scenario 3: Pure Markovian ($\alpha = 0.00$):** Tests baseline memoryless diffusion.
 * **Mouse Click:** Click anywhere on the grid to inject an energy pulse and observe observer adaptation.
 
 ---
