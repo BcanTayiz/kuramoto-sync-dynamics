@@ -83,3 +83,21 @@ Clone the repository and run the simulation engine:
 git clone [https://github.com/your-username/adaptive-kuramoto.git](https://github.com/your-username/adaptive-kuramoto.git)
 cd adaptive-kuramoto
 python simulator.py
+```
+
+---
+
+## 📄 Citation
+
+If you use this framework or code in your research, please cite our paper draft:
+
+```bibtex
+@software{kuramoto-sync-dynamics,
+  title={Co-Evolutionary Adaptive Kuramoto Model},
+  author={Barış Can Tayiz},
+  year={2026},
+  publisher={Zenodo},
+  doi={10.5281/zenodo.24230943},
+  url={https://doi.org/10.5281/zenodo.24230943}
+}
+```
