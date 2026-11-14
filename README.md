@@ -38,7 +38,6 @@ This project implements a discretized 2D grid coupled with recursive temporal me
 │   │   ├── index.html
 │   │   ├── sketch.js
 ├── method/
-│   ├── unknown_dynamics_results.png
 │   ├── article/
 │   │   ├── article.pdf
 │   │   
