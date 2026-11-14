@@ -1,101 +1,85 @@
-# Non-Markovian Physics Simulation & System Identification Testbed
+# Co-Evolutionary Adaptive Kuramoto Model
 
-An interactive, browser-based experimental lab exploring **non-Markovian lattice dynamics**, **recursive memory kernels**, and **real-time online system identification** using **p5.js**.
+[![Python Version](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Status: Active Research](https://img.shields.io/badge/status-active%20research-success.svg)]()
 
----
-
-## 🔬 Overview
-
-Standard physical simulations typically assume Markovian behavior, where future states depend solely on the present. However, complex physical and biological media exhibit history-dependent (non-Markovian) phenomena. 
-
-This project implements a discretized 2D grid coupled with recursive temporal memory ($\mathcal{O}(1)$ updates) and active particle agents. It pits two competing observer architectures against each other in real time to test whether an artificial agent can dynamically discover hidden physical laws ($\alpha, \beta$) purely through prediction error minimization.
+Numerical simulation framework and parameter sweep pipeline investigating **plasticity-induced synchronization** and functional regimes in co-evolutionary complex networks.
 
 ---
 
-## 🚀 Key Features
+## 📌 Overview
+Classical models of synchronization (e.g., the Kuramoto model) typically assume a static, time-invariant network topology ($A_{ij}$). This repository implements a **co-evolutionary extension** where network connection weights ($W_{ij}$) and oscillator phases ($\theta_i$) evolve simultaneously through a Hebbian-like adaptive plasticity feedback loop. 
 
-* **Recursive Memory Kernel Framework:** Implements a discrete Generalized Langevin Equation (GLE) combining spatial Laplacian diffusion with a recursive memory field ($M_{t+1} = \alpha M_t + s_t$).
-* **Active Particle Agents:** Stochastic particles that navigate the grid, inject energy, and drive the system into non-equilibrium steady states.
-* **Competing Observers:**
-  * *Markovian Observer:* Naive, memoryless baseline ($\alpha = 0$).
-  * *Memory-Augmented Observer:* Adaptive model that learns hidden memory retention ($\alpha$) and coupling ($\beta$) coefficients via **Online Gradient Descent**.
-* **Real-Time Telemetry HUD & Oscilloscope:** Live tracking of Mean Squared Error (MSE), parameter convergence, Non-Markovianity Index, and characteristic Memory Horizon ($\tau$).
-* **Automated Scientific Interpreter (Verdict Engine):** An embedded diagnostic engine that analyzes telemetry in real time and classifies system regimes (e.g., *Strong Non-Markovian*, *Short-Memory Noise Trap*, *Markovian*, or *Transient Learning*).
-* **Stochastic Jitter Suppression:** Uses an **Exponential Moving Average (EMA)** filter on parameter updates to maintain stability in driven non-equilibrium environments.
+By running systematic parameter sweeps over the phase coherence threshold ($\theta_c$), this framework maps out operational windows, steady-state order parameters ($r_\infty$), and global synchronization transitions.
 
 ---
 
-## 📂 Project Structure
+## 🔬 Mathematical Framework
 
-```text
+### 1. Phase Dynamics
+The evolution of phase $\theta_i$ for oscillator $i$ is governed by:
+$$\dot{\theta}_i = \omega_i + \frac{1}{N} \sum_{j=1}^{N} W_{ij}(t) \sin(\theta_j - \theta_i)$$
+where $\omega_i$ represents natural frequencies and $W_{ij}(t)$ is the dynamic adjacency/weight matrix.
 
+### 2. Adaptive Weight Evolution (Hebbian Plasticity)
+Network topology evolves according to local phase alignment:
+$$\frac{dW_{ij}}{dt} = -\alpha W_{ij} + \nu \, \Theta \Big( \cos(\theta_j - \theta_i) - \cos(\theta_c) \Big) W_{ij}$$
+* $\alpha$: Intrinsic weight decay / forgetting rate.
+* $\nu$: Plasticity learning rate.
+* $\theta_c$: Critical phase coherence threshold angle.
+* $\Theta(\cdot)$: Heaviside step function.
+
+---
+
+## 📊 Key Findings & Functional Window
+
+Our automated parameter sweep pipeline across varying phase thresholds revealed the following steady-state metrics:
+
+| Metric / Parameter | Quantitative Result |
+| :--- | :--- |
+| **Functional Synchronization Window** | $[70^\circ, 290^\circ]$ |
+| **Optimal Phase Threshold ($\theta_c$)** | $185^\circ$ |
+| **Steady-State Coherence ($r_\infty$)** | $0.9762$ |
+| **Mean Network Weight ($\langle W \rangle$)** | $3.9600$ |
+| **Dynamical Regime** | Global Synchronization |
+
+---
+
+## ⚙️ Quickstart
+
+### Prerequisites
+* Python 3.8+
+* NumPy
+
+
+
+### Repository Structure
+```
 ├── LICENSE.txt
 ├── README.md
-├── cellular_automata_experiments/
-│   ├── motivation.md
-│   ├── javascript_simulation_code_walkthrough.md
+├── final_results/
+│   ├── article/
+│   │   ├── article.pdf
+├── research/
+│   ├── new_theory/
+│   │   ├── Co-evolutionary Adaptive Kuramoto Model.md
+│   │   ├── experiment/
+│   │   │   ├── code.ipynb
+│   ├── theory/
+│   │   ├── kuramoto_model_mathematical_formulation.pdf
+├── sim_exp/
+│   ├── experiment_detials.md
+│   ├── experiment_test.ipynb
 │   ├── simulation/
 │   │   ├── index.html
 │   │   ├── sketch.js
-├── method/
-│   ├── article/
-│   │   ├── article.pdf
-│   │   
-├── tutorial/
-│   ├── from_zero.md
-│   ├── intro.ipynb
-│   ├── mori_zwanzig_and_memory_kernels_arxiv_guide.md
-│   ├── resources_to_check.md
 ```
 
----
+### Running the Parameter Sweep
+Clone the repository and run the simulation engine:
 
-## 🛠️ Getting Started
-
-To run the simulation locally:
-
-1. Clone or download this repository.
-2. Ensure both `index.html` and `sketch.js` are in the same folder.
-3. Open `index.html` in any modern web browser (or run a local server like Live Server in VS Code).
-
----
-
-## 🎮 Interactive Controls & Scenarios
-
-Use the control buttons at the top of the viewport to switch physical regimes instantly:
-* **Scenario 1: Short Memory ($\alpha = 0.40$):** Tests weak memory coupling.
-* **Scenario 2: Long Memory ($\alpha = 0.90$):** Tests strong historical dominance.
-* **Scenario 3: Pure Markovian ($\alpha = 0.00$):** Tests baseline memoryless diffusion.
-* **Mouse Click:** Click anywhere on the grid to inject an energy pulse and observe observer adaptation.
-
----
-
-## 📊 Core Empirical Insights
-
-Through rigorous telemetry analysis, the testbed uncovers three foundational principles:
-
-1. **History Dominance:** In long-memory regimes ($\alpha = 0.90$), memory-augmented observers vastly outperform Markovian baselines, proving that historical trajectories are critical for accurate prediction.
-2. **The Noise Trap (Occam's Razor):** In short-memory regimes ($\alpha = 0.40$), complex memory models underperform relative to naive Markovian models because extra temporal parameters inject estimation variance and noise rather than predictive value.
-3. **Online Parameter Recovery:** Observers successfully track and adapt to shifting physical parameters on the fly via gradient descent without requiring offline batch training.
-
----
-
-## 📜 License
-
-This project is open-source and available for research, educational, and experimental purposes.
-
----
-
-## 📄 Citation
-
-If you use this framework or code in your research, please cite our paper draft:
-
-```bibtex
-@software{non_markovian_physics_sim,
-  title={Non-Markovian Physics Simulation & System Identification Testbed},
-  author={Barış Can Tayiz},
-  year={2026},
-  publisher={Zenodo},
-  doi={10.5281/zenodo.24211819},
-  url={https://doi.org/10.5281/zenodo.24211819}
-}
+```bash
+git clone [https://github.com/your-username/adaptive-kuramoto.git](https://github.com/your-username/adaptive-kuramoto.git)
+cd adaptive-kuramoto
+python simulator.py

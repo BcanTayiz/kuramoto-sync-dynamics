@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kuramoto Synchronization & Ott-Antonsen Lab</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: #0b0e14;
+      color: #e2e8f0;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-size: 1.4rem;
+      letter-spacing: 0.5px;
+      color: #38bdf8;
+    }
+    p.subtitle {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      margin-top: 4px;
+    }
+    #canvas-container {
+      border: 1px solid #1e293b;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+    #controls {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      background: #131822;
+      padding: 12px 18px;
+      border-radius: 8px;
+      border: 1px solid #1e293b;
+      align-items: center;
+      justify-content: center;
+      max-width: 960px;
+      width: 100%;
+    }
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      font-size: 0.8rem;
+      color: #cbd5e1;
+      min-width: 150px;
+    }
+    .control-group label {
+      margin-bottom: 4px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .control-group span.val {
+      color: #38bdf8;
+      font-weight: 600;
+    }
+    select, button {
+      background: #1e293b;
+      color: #f8fafc;
+      border: 1px solid #334155;
+      padding: 6px 12px;
+      border-radius: 5px;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #334155;
+    }
+    button.primary {
+      background: #0284c7;
+      border-color: #0369a1;
+    }
+    button.primary:hover {
+      background: #0369a1;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Kuramoto Synchronization & Transient Dynamics Lab</h1>
+    <p class="subtitle">Real-time RK4 Phase Oscillator Simulation with Ott-Antonsen Analytical Benchmarking</p>
+  </header>
+
+  <div id="canvas-container"></div>
+
+  <div id="controls">
+    <div class="control-group">
+      <label>Coupling (K): <span id="val-k" class="val">2.50</span></label>
+      <input type="range" id="slider-k" min="0" max="6" step="0.05" value="2.5" />
+    </div>
+
+    <div class="control-group">
+      <label>Spread (Δ): <span id="val-delta" class="val">1.00</span></label>
+      <input type="range" id="slider-delta" min="0.2" max="2.5" step="0.05" value="1.0" />
+    </div>
+
+    <div class="control-group">
+      <label>Topology:</label>
+      <select id="select-topo">
+        <option value="all-to-all">All-to-All (Mean-Field)</option>
+        <option value="erdos-renyi">Erdős–Rényi (p = 0.15)</option>
+        <option value="watts-strogatz">Watts–Strogatz (Ring + Rewire)</option>
+      </select>
+    </div>
+
+    <button id="btn-reset" class="primary">Reset Phases</button>
+    <button id="btn-export">Export Experiment JSON</button>
+  </div>
+
+  <script src="sketch.js"></script>
+</body>
+</html>
