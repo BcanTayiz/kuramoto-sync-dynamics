@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Non-Markovian Physics & Online System Identification Testbed</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: #06060d;
+      color: #e2e8f0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 14px;
+    }
+    h1 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      color: #f8fafc;
+    }
+    p.subtitle {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      margin-top: 4px;
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 14px;
+      z-index: 10;
+    }
+    button {
+      background-color: #13172a;
+      color: #e2e8f0;
+      border: 1px solid #2d3557;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+    button:hover {
+      background-color: #1e2542;
+      border-color: #4f5d95;
+    }
+    button.active {
+      background-color: #0f3d36;
+      border-color: #00ffb4;
+      color: #00ffb4;
+      box-shadow: 0 0 10px rgba(0, 255, 180, 0.2);
+    }
+    button.reset-btn {
+      border-color: #475569;
+      color: #cbd5e1;
+    }
+    button.reset-btn:hover {
+      background-color: #334155;
+      color: #ffffff;
+    }
+    #canvas-container {
+      border: 1px solid #232946;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.65);
+      line-height: 0;
+    }
+    .footer-hint {
+      margin-top: 10px;
+      font-size: 0.8rem;
+      color: #64748b;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Non-Markovian Field &amp; Online System Identification Lab</h1>
+    <p class="subtitle">Real-time comparison of Markovian vs. Memory-Augmented Observers under driven non-equilibrium dynamics</p>
+  </header>
+
+  <div class="controls">
+    <button id="btn-long" class="active" onclick="setScenario('long', this)">Long Memory (α = 0.90)</button>
+    <button id="btn-short" onclick="setScenario('short', this)">Short Memory (α = 0.40)</button>
+    <button id="btn-markov" onclick="setScenario('markov', this)">Pure Markovian (α = 0.00)</button>
+    <button class="reset-btn" onclick="resetSimulation()">Reset Field &amp; Observers</button>
+  </div>
+
+  <div id="canvas-container"></div>
+
+  <div class="footer-hint">Click anywhere on the grid to inject an external energy pulse.</div>
+
+  <script src="sketch.js"></script>
+</body>
+</html>

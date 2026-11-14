@@ -1,0 +1,8 @@
+# From zero Tutorial
+
+**[Projection operators in statistical mechanics: a pedagogical approach](https://arxiv.org/pdf/2001.01572)**
+
+  * **Overview:** The Mori-Zwanzig projection operator formalism is one of the central tools of nonequilibrium statistical mechanics, allowing to derive macroscopic equations of motion from the microscopic dynamics through a systematic coarse-graining procedure. It is important as a method in physical research and gives many insights into the general structure of nonequilibrium transport equations and the general procedure of microscopic derivations. Therefore, it is a valuable ingredient of basic and advanced courses in statistical mechanics. However, accessible introductions to this method - in particular in its more advanced forms - are extremely rare. In this article, we give a simple and systematic introduction to the Mori-Zwanzig formalism, which allows students to understand the methodology in the form it is used in current research. This includes both basic and modern versions of the theory. Moreover, we relate the formalism to more general aspects of statistical mechanics and quantum mechanics. Thereby, we explain how this method can be incorporated into a lecture course on statistical mechanics as a way to give a general introduction to the study of nonequilibrium systems. Applications, in particular to spin relaxation and dynamical density functional theory, are also discussed.
+
+* **[Projection Operator The Mori-Zwanzig method of projection operators:Generalized Langevin equation.(Lecture Notes)](https://arxiv.org/pdf/2511.07130)**
+  * **Overview:** A fairly brief and complete presentation of the Zwanzig-Mori projection operator technique is given.
